@@ -1,0 +1,22 @@
+cells 58
+cell42 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics
+cell44 # split the data into train and test sets
+
+cat_features = cat_feats
+data = label_encode_cat_features(data, cat_features)
+
+seed = 0
+test_size = 0.25
+
+features = data.columns[:-1]
+
+X = data[features]
+y 
+cell56 ConfusionMatrixDisplay.from_estimator(lr, X_val, y_val, cmap="Blues")
+plt.title("Logistic Regression Confusion Matrix")
+
+FOUND shap
