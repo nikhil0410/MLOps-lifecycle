@@ -9,3 +9,5 @@ xgboost>=1.6
 lightgbm>=3.3
 catboost>=1.1
 ucimlrepo>=0.1
+mlflow>=2.5
+joblib>=1.2
