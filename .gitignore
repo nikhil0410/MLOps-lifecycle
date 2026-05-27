@@ -1,0 +1,15 @@
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+venv/
+env/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+data/
+*.csv
+*.egg-info/
+dist/
+build/
+__MACOSX/

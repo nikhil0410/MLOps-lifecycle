@@ -1,0 +1,11 @@
+numpy>=1.23.0
+pandas>=1.4.0
+scikit-learn>=1.0
+matplotlib>=3.5
+seaborn>=0.11
+scipy>=1.7
+shap>=0.41.0
+xgboost>=1.6
+lightgbm>=3.3
+catboost>=1.1
+ucimlrepo>=0.1
