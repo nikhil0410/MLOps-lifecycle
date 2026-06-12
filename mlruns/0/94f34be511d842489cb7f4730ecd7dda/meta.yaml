@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/nikhilgupta/Documents/M.tech/SEM3/MLOps/Assignment-1%20MLops/mlruns/0/94f34be511d842489cb7f4730ecd7dda/artifacts
+end_time: 1779887927798
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 94f34be511d842489cb7f4730ecd7dda
+run_name: random_forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779887915951
+status: 3
+tags: []
+user_id: nikhilgupta

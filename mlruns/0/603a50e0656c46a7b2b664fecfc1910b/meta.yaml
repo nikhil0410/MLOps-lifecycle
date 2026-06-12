@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/nikhilgupta/Documents/M.tech/SEM3/MLOps/Assignment-1%20MLops/mlruns/0/603a50e0656c46a7b2b664fecfc1910b/artifacts
+end_time: 1779887510804
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 603a50e0656c46a7b2b664fecfc1910b
+run_name: honorable-moose-440
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779887508156
+status: 3
+tags: []
+user_id: nikhilgupta

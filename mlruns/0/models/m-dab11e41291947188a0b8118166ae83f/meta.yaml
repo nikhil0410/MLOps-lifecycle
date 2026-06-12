@@ -1,0 +1,10 @@
+artifact_location: file:///Users/nikhilgupta/Documents/M.tech/SEM3/MLOps/Assignment-1%20MLops/mlruns/0/models/m-dab11e41291947188a0b8118166ae83f/artifacts
+creation_timestamp: 1779887916092
+experiment_id: '0'
+last_updated_timestamp: 1779887917408
+model_id: m-dab11e41291947188a0b8118166ae83f
+model_type: null
+name: model
+source_run_id: 94f34be511d842489cb7f4730ecd7dda
+status: 2
+status_message: null

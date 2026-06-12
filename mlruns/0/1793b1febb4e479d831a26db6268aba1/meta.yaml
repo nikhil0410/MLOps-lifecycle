@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/nikhilgupta/Documents/M.tech/SEM3/MLOps/Assignment-1%20MLops/mlruns/0/1793b1febb4e479d831a26db6268aba1/artifacts
+end_time: 1779887474640
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1793b1febb4e479d831a26db6268aba1
+run_name: efficient-mule-233
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779887474627
+status: 4
+tags: []
+user_id: nikhilgupta
