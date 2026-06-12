@@ -1,0 +1,15 @@
+digest: 470688e0
+name: dataset
+profile: '{"num_rows": 242, "num_elements": 3146}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "age", "required": true},
+  {"type": "double", "name": "sex", "required": true}, {"type": "double", "name":
+  "cp", "required": true}, {"type": "double", "name": "trestbps", "required": true},
+  {"type": "double", "name": "chol", "required": true}, {"type": "double", "name":
+  "fbs", "required": true}, {"type": "double", "name": "restecg", "required": true},
+  {"type": "double", "name": "thalach", "required": true}, {"type": "double", "name":
+  "exang", "required": true}, {"type": "double", "name": "oldpeak", "required": true},
+  {"type": "double", "name": "slope", "required": true}, {"type": "string", "name":
+  "ca", "required": true}, {"type": "string", "name": "thal", "required": true}]}'
+source: '{"tags": {"mlflow.user": "nikhilgupta", "mlflow.source.name": "mlflow/train_mlflow.py",
+  "mlflow.source.type": "LOCAL", "mlflow.source.git.commit": "11ccf1171b56781d5bf10ef5286b50f76e2f6f0a"}}'
+source_type: code

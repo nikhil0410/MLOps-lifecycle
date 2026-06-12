@@ -1,0 +1,10 @@
+artifact_location: file:///Users/nikhilgupta/Documents/M.tech/SEM3/MLOps/Assignment-1%20MLops/mlruns/0/models/m-0216c571f7b5412ab63957210c79fce4/artifacts
+creation_timestamp: 1779887913149
+experiment_id: '0'
+last_updated_timestamp: 1779887914453
+model_id: m-0216c571f7b5412ab63957210c79fce4
+model_type: null
+name: model
+source_run_id: 681dced033064a41a5324f8476088d72
+status: 2
+status_message: null

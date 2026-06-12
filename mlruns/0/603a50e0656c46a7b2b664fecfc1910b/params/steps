@@ -1,0 +1,1 @@
+[('imputer', SimpleImputer(strategy='most_frequent')), ('scaler', StandardScaler()), ('clf', RandomForestClassifier(random_state=42))]

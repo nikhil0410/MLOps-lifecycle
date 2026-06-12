@@ -1,0 +1,5 @@
+fastapi>=0.70
+uvicorn[standard]>=0.18
+pandas>=1.4.0
+scikit-learn>=1.0
+joblib>=1.2

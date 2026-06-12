@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/nikhilgupta/Documents/M.tech/SEM3/MLOps/Assignment-1%20MLops/mlruns/0/681dced033064a41a5324f8476088d72/artifacts
+end_time: 1779887915950
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 681dced033064a41a5324f8476088d72
+run_name: logistic_regression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779887904963
+status: 3
+tags: []
+user_id: nikhilgupta
