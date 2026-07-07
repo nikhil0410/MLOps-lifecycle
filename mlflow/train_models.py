@@ -1,4 +1,5 @@
 """Train, tune, compare, and track candidate models with MLflow."""
+# ruff: noqa: E402
 
 from __future__ import annotations
 
