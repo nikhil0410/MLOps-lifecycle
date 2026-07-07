@@ -39,8 +39,8 @@ ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
-from src.modeling import RANDOM_STATE, TARGET_COLUMN, build_model_candidates
-from src.preprocessing import build_preprocessor
+from src.modeling import RANDOM_STATE, TARGET_COLUMN, build_model_candidates  # noqa: E402
+from src.preprocessing import build_preprocessor  # noqa: E402
 
 ROOT = Path(ROOT_DIR)
 CSV = ROOT / "data" / "processed_cleveland.csv"

@@ -71,6 +71,15 @@ python3 scripts/run_reproducible_pipeline.py
 - `models/best_model_pipeline.joblib` is the selected serving artifact when available.
 - `models/model_metadata.json` captures the selected model and export details.
 
+## Testing and CI
+
+- Install development dependencies with `python3 -m pip install -r requirements-dev.txt`.
+- Run lint checks locally with `ruff check app src scripts tests mlflow`.
+- Run unit tests locally with `pytest`.
+- GitHub Actions workflow lives at `.github/workflows/ci.yml`.
+- The CI pipeline runs linting, unit tests, data preparation, model training, and model export.
+- Each CI run uploads the JUnit test report and generated training artifacts.
+
 ## MLflow UI
 
 View MLflow UI:
