@@ -5,7 +5,11 @@ import joblib
 import pandas as pd
 import os
 
-MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "models", "random_forest_pipeline.joblib")
+MODELS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "models")
+MODEL_PATHS = [
+    os.path.join(MODELS_DIR, "best_model_pipeline.joblib"),
+    os.path.join(MODELS_DIR, "random_forest_pipeline.joblib"),
+]
 
 app = FastAPI(title="Heart Disease Predictor")
 
@@ -17,9 +21,10 @@ class PredictRequest(BaseModel):
 @app.on_event("startup")
 def load_model():
     global MODEL
-    if not os.path.exists(MODEL_PATH):
-        raise RuntimeError(f"Model file not found: {MODEL_PATH}")
-    MODEL = joblib.load(MODEL_PATH)
+    model_path = next((path for path in MODEL_PATHS if os.path.exists(path)), None)
+    if model_path is None:
+        raise RuntimeError(f"Model file not found. Checked: {MODEL_PATHS}")
+    MODEL = joblib.load(model_path)
 
 
 @app.get("/health")
