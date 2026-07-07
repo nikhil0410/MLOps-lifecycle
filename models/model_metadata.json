@@ -1,0 +1,258 @@
+{
+  "selected_model": "logistic_regression",
+  "selection_metric": "best_cv_roc_auc",
+  "exported_models": {
+    "logistic_regression": {
+      "path": "logistic_regression_pipeline.joblib",
+      "params": {
+        "memory": null,
+        "steps": [
+          [
+            "pre",
+            "ColumnTransformer(transformers=[('num',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='median')),\n                                                 ('scaler', StandardScaler())]),\n                                 ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',\n                                  'restecg', 'thalach', 'exang', 'oldpeak',\n                                  'slope', 'ca', 'thal']),\n                                ('cat',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='most_frequent')),\n                                                 ('ohe',\n                                                  OneHotEncoder(handle_unknown='ignore',\n                                                                sparse_output=False))]),\n                                 [])])"
+          ],
+          [
+            "clf",
+            "LogisticRegression(C=0.1, class_weight='balanced', max_iter=2000,\n                   random_state=42, solver='liblinear')"
+          ]
+        ],
+        "transform_input": null,
+        "verbose": false,
+        "pre": "ColumnTransformer(transformers=[('num',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='median')),\n                                                 ('scaler', StandardScaler())]),\n                                 ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',\n                                  'restecg', 'thalach', 'exang', 'oldpeak',\n                                  'slope', 'ca', 'thal']),\n                                ('cat',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='most_frequent')),\n                                                 ('ohe',\n                                                  OneHotEncoder(handle_unknown='ignore',\n                                                                sparse_output=False))]),\n                                 [])])",
+        "clf": "LogisticRegression(C=0.1, class_weight='balanced', max_iter=2000,\n                   random_state=42, solver='liblinear')",
+        "pre__force_int_remainder_cols": true,
+        "pre__n_jobs": null,
+        "pre__remainder": "drop",
+        "pre__sparse_threshold": 0.3,
+        "pre__transformer_weights": null,
+        "pre__transformers": [
+          [
+            "num",
+            "Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),\n                ('scaler', StandardScaler())])",
+            [
+              "age",
+              "sex",
+              "cp",
+              "trestbps",
+              "chol",
+              "fbs",
+              "restecg",
+              "thalach",
+              "exang",
+              "oldpeak",
+              "slope",
+              "ca",
+              "thal"
+            ]
+          ],
+          [
+            "cat",
+            "Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),\n                ('ohe',\n                 OneHotEncoder(handle_unknown='ignore', sparse_output=False))])",
+            []
+          ]
+        ],
+        "pre__verbose": false,
+        "pre__verbose_feature_names_out": true,
+        "pre__num": "Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),\n                ('scaler', StandardScaler())])",
+        "pre__cat": "Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),\n                ('ohe',\n                 OneHotEncoder(handle_unknown='ignore', sparse_output=False))])",
+        "pre__num__memory": null,
+        "pre__num__steps": [
+          [
+            "imputer",
+            "SimpleImputer(strategy='median')"
+          ],
+          [
+            "scaler",
+            "StandardScaler()"
+          ]
+        ],
+        "pre__num__transform_input": null,
+        "pre__num__verbose": false,
+        "pre__num__imputer": "SimpleImputer(strategy='median')",
+        "pre__num__scaler": "StandardScaler()",
+        "pre__num__imputer__add_indicator": false,
+        "pre__num__imputer__copy": true,
+        "pre__num__imputer__fill_value": null,
+        "pre__num__imputer__keep_empty_features": false,
+        "pre__num__imputer__missing_values": NaN,
+        "pre__num__imputer__strategy": "median",
+        "pre__num__scaler__copy": true,
+        "pre__num__scaler__with_mean": true,
+        "pre__num__scaler__with_std": true,
+        "pre__cat__memory": null,
+        "pre__cat__steps": [
+          [
+            "imputer",
+            "SimpleImputer(strategy='most_frequent')"
+          ],
+          [
+            "ohe",
+            "OneHotEncoder(handle_unknown='ignore', sparse_output=False)"
+          ]
+        ],
+        "pre__cat__transform_input": null,
+        "pre__cat__verbose": false,
+        "pre__cat__imputer": "SimpleImputer(strategy='most_frequent')",
+        "pre__cat__ohe": "OneHotEncoder(handle_unknown='ignore', sparse_output=False)",
+        "pre__cat__imputer__add_indicator": false,
+        "pre__cat__imputer__copy": true,
+        "pre__cat__imputer__fill_value": null,
+        "pre__cat__imputer__keep_empty_features": false,
+        "pre__cat__imputer__missing_values": NaN,
+        "pre__cat__imputer__strategy": "most_frequent",
+        "pre__cat__ohe__categories": "auto",
+        "pre__cat__ohe__drop": null,
+        "pre__cat__ohe__dtype": "<class 'numpy.float64'>",
+        "pre__cat__ohe__feature_name_combiner": "concat",
+        "pre__cat__ohe__handle_unknown": "ignore",
+        "pre__cat__ohe__max_categories": null,
+        "pre__cat__ohe__min_frequency": null,
+        "pre__cat__ohe__sparse_output": false,
+        "clf__C": 0.1,
+        "clf__class_weight": "balanced",
+        "clf__dual": false,
+        "clf__fit_intercept": true,
+        "clf__intercept_scaling": 1,
+        "clf__l1_ratio": null,
+        "clf__max_iter": 2000,
+        "clf__multi_class": "deprecated",
+        "clf__n_jobs": null,
+        "clf__penalty": "l2",
+        "clf__random_state": 42,
+        "clf__solver": "liblinear",
+        "clf__tol": 0.0001,
+        "clf__verbose": 0,
+        "clf__warm_start": false
+      },
+      "legacy_path": "logistic_pipeline.joblib"
+    },
+    "random_forest": {
+      "path": "random_forest_pipeline.joblib",
+      "params": {
+        "memory": null,
+        "steps": [
+          [
+            "pre",
+            "ColumnTransformer(transformers=[('num',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='median')),\n                                                 ('scaler', StandardScaler())]),\n                                 ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',\n                                  'restecg', 'thalach', 'exang', 'oldpeak',\n                                  'slope', 'ca', 'thal']),\n                                ('cat',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='most_frequent')),\n                                                 ('ohe',\n                                                  OneHotEncoder(handle_unknown='ignore',\n                                                                sparse_output=False))]),\n                                 [])])"
+          ],
+          [
+            "clf",
+            "RandomForestClassifier(n_jobs=-1, random_state=42)"
+          ]
+        ],
+        "transform_input": null,
+        "verbose": false,
+        "pre": "ColumnTransformer(transformers=[('num',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='median')),\n                                                 ('scaler', StandardScaler())]),\n                                 ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',\n                                  'restecg', 'thalach', 'exang', 'oldpeak',\n                                  'slope', 'ca', 'thal']),\n                                ('cat',\n                                 Pipeline(steps=[('imputer',\n                                                  SimpleImputer(strategy='most_frequent')),\n                                                 ('ohe',\n                                                  OneHotEncoder(handle_unknown='ignore',\n                                                                sparse_output=False))]),\n                                 [])])",
+        "clf": "RandomForestClassifier(n_jobs=-1, random_state=42)",
+        "pre__force_int_remainder_cols": true,
+        "pre__n_jobs": null,
+        "pre__remainder": "drop",
+        "pre__sparse_threshold": 0.3,
+        "pre__transformer_weights": null,
+        "pre__transformers": [
+          [
+            "num",
+            "Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),\n                ('scaler', StandardScaler())])",
+            [
+              "age",
+              "sex",
+              "cp",
+              "trestbps",
+              "chol",
+              "fbs",
+              "restecg",
+              "thalach",
+              "exang",
+              "oldpeak",
+              "slope",
+              "ca",
+              "thal"
+            ]
+          ],
+          [
+            "cat",
+            "Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),\n                ('ohe',\n                 OneHotEncoder(handle_unknown='ignore', sparse_output=False))])",
+            []
+          ]
+        ],
+        "pre__verbose": false,
+        "pre__verbose_feature_names_out": true,
+        "pre__num": "Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),\n                ('scaler', StandardScaler())])",
+        "pre__cat": "Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),\n                ('ohe',\n                 OneHotEncoder(handle_unknown='ignore', sparse_output=False))])",
+        "pre__num__memory": null,
+        "pre__num__steps": [
+          [
+            "imputer",
+            "SimpleImputer(strategy='median')"
+          ],
+          [
+            "scaler",
+            "StandardScaler()"
+          ]
+        ],
+        "pre__num__transform_input": null,
+        "pre__num__verbose": false,
+        "pre__num__imputer": "SimpleImputer(strategy='median')",
+        "pre__num__scaler": "StandardScaler()",
+        "pre__num__imputer__add_indicator": false,
+        "pre__num__imputer__copy": true,
+        "pre__num__imputer__fill_value": null,
+        "pre__num__imputer__keep_empty_features": false,
+        "pre__num__imputer__missing_values": NaN,
+        "pre__num__imputer__strategy": "median",
+        "pre__num__scaler__copy": true,
+        "pre__num__scaler__with_mean": true,
+        "pre__num__scaler__with_std": true,
+        "pre__cat__memory": null,
+        "pre__cat__steps": [
+          [
+            "imputer",
+            "SimpleImputer(strategy='most_frequent')"
+          ],
+          [
+            "ohe",
+            "OneHotEncoder(handle_unknown='ignore', sparse_output=False)"
+          ]
+        ],
+        "pre__cat__transform_input": null,
+        "pre__cat__verbose": false,
+        "pre__cat__imputer": "SimpleImputer(strategy='most_frequent')",
+        "pre__cat__ohe": "OneHotEncoder(handle_unknown='ignore', sparse_output=False)",
+        "pre__cat__imputer__add_indicator": false,
+        "pre__cat__imputer__copy": true,
+        "pre__cat__imputer__fill_value": null,
+        "pre__cat__imputer__keep_empty_features": false,
+        "pre__cat__imputer__missing_values": NaN,
+        "pre__cat__imputer__strategy": "most_frequent",
+        "pre__cat__ohe__categories": "auto",
+        "pre__cat__ohe__drop": null,
+        "pre__cat__ohe__dtype": "<class 'numpy.float64'>",
+        "pre__cat__ohe__feature_name_combiner": "concat",
+        "pre__cat__ohe__handle_unknown": "ignore",
+        "pre__cat__ohe__max_categories": null,
+        "pre__cat__ohe__min_frequency": null,
+        "pre__cat__ohe__sparse_output": false,
+        "clf__bootstrap": true,
+        "clf__ccp_alpha": 0.0,
+        "clf__class_weight": null,
+        "clf__criterion": "gini",
+        "clf__max_depth": null,
+        "clf__max_features": "sqrt",
+        "clf__max_leaf_nodes": null,
+        "clf__max_samples": null,
+        "clf__min_impurity_decrease": 0.0,
+        "clf__min_samples_leaf": 1,
+        "clf__min_samples_split": 2,
+        "clf__min_weight_fraction_leaf": 0.0,
+        "clf__monotonic_cst": null,
+        "clf__n_estimators": 100,
+        "clf__n_jobs": -1,
+        "clf__oob_score": false,
+        "clf__random_state": 42,
+        "clf__verbose": 0,
+        "clf__warm_start": false
+      }
+    }
+  },
+  "best_model_path": "best_model_pipeline.joblib"
+}

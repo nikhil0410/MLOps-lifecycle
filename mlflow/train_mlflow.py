@@ -8,6 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
 import mlflow
 import mlflow.sklearn
+from mlflow.models import infer_signature
 
 DATA_PATH = os.path.join("heart_disease", "processed.cleveland.data")
 
@@ -60,7 +61,7 @@ def build_pipeline():
 
 
 def main():
-    mlflow.sklearn.autolog()
+    mlflow.sklearn.autolog(log_models=False)
     df = load_data()
     X = df.drop(columns=["target"])
     y = df["target"]
@@ -84,6 +85,15 @@ def main():
         sample_path = "sample_predictions.csv"
         sample.to_csv(sample_path, index=False)
         mlflow.log_artifact(sample_path)
+
+        input_example = X_train.head(5)
+        signature = infer_signature(input_example, pipe.predict(input_example))
+        mlflow.sklearn.log_model(
+            pipe,
+            name="random_forest_pipeline",
+            input_example=input_example,
+            signature=signature,
+        )
 
         run_id = run.info.run_id
         print(f"MLflow run completed. Run ID: {run_id}")
