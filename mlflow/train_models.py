@@ -32,6 +32,7 @@ except ModuleNotFoundError as exc:
         "mlflow is required to run this script. Install project dependencies with "
         "`python3 -m pip install -r requirements.txt` first."
     ) from exc
+from mlflow.models import infer_signature
 
 # ensure project root is on sys.path when running this script from the mlflow/ folder
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -182,7 +183,7 @@ def write_selection_artifacts(leaderboard: pd.DataFrame) -> None:
 
 def main() -> None:
     ensure()
-    mlflow.sklearn.autolog(log_datasets=False)
+    mlflow.sklearn.autolog(log_datasets=False, log_models=False)
 
     df = load_data()
     X = df.drop(columns=[TARGET_COLUMN])
@@ -216,7 +217,14 @@ def main() -> None:
             mlflow.log_artifact(str(cm_path))
             mlflow.log_artifact(str(roc_path))
             mlflow.log_dict(search.best_params_, f"{name}_best_params.json")
-            mlflow.sklearn.log_model(search.best_estimator_, artifact_path=f"model_{name}")
+            input_example = X_train.head(5)
+            signature = infer_signature(input_example, search.best_estimator_.predict(input_example))
+            mlflow.sklearn.log_model(
+                search.best_estimator_,
+                name=f"model_{name}",
+                input_example=input_example,
+                signature=signature,
+            )
 
             leaderboard_rows.append(
                 {
