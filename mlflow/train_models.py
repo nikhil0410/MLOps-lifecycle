@@ -135,7 +135,7 @@ def evaluate_holdout(name: str, estimator, X_test: pd.DataFrame, y_test: pd.Seri
 
     roc_path = OUT / f"{name}_roc_curve.png"
     fig, ax = plt.subplots(figsize=(5, 4))
-    RocCurveDisplay.from_predictions(y_test, probs, ax=ax)
+    RocCurveDisplay.from_predictions(y_test, y_proba=probs, ax=ax)
     ax.set_title(f"{name} ROC curve")
     fig.tight_layout()
     fig.savefig(roc_path)
@@ -187,7 +187,11 @@ def write_selection_artifacts(leaderboard: pd.DataFrame) -> None:
 
 def main() -> None:
     ensure()
-    mlflow.sklearn.autolog(log_datasets=False, log_models=False)
+    mlflow.sklearn.autolog(
+        log_datasets=False,
+        log_models=False,
+        max_tuning_runs=None,
+    )
 
     df = load_data()
     X = df.drop(columns=[TARGET_COLUMN])
@@ -228,6 +232,7 @@ def main() -> None:
                 name=f"model_{name}",
                 input_example=input_example,
                 signature=signature,
+                serialization_format="cloudpickle",
             )
 
             leaderboard_rows.append(

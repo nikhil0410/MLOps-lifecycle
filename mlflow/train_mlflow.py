@@ -98,6 +98,7 @@ def main():
             name="random_forest_pipeline",
             input_example=input_example,
             signature=signature,
+            serialization_format="cloudpickle",
         )
 
         run_id = run.info.run_id
