@@ -135,7 +135,7 @@ def evaluate_holdout(name: str, estimator, X_test: pd.DataFrame, y_test: pd.Seri
 
     roc_path = OUT / f"{name}_roc_curve.png"
     fig, ax = plt.subplots(figsize=(5, 4))
-    RocCurveDisplay.from_predictions(y_test, y_proba=probs, ax=ax)
+    RocCurveDisplay.from_predictions(y_test, probs, ax=ax)
     ax.set_title(f"{name} ROC curve")
     fig.tight_layout()
     fig.savefig(roc_path)
@@ -187,11 +187,6 @@ def write_selection_artifacts(leaderboard: pd.DataFrame) -> None:
 
 def main() -> None:
     ensure()
-    mlflow.sklearn.autolog(
-        log_datasets=False,
-        log_models=False,
-        max_tuning_runs=None,
-    )
 
     df = load_data()
     X = df.drop(columns=[TARGET_COLUMN])
@@ -208,6 +203,7 @@ def main() -> None:
     leaderboard_rows = []
     for name, config in build_model_candidates().items():
         with mlflow.start_run(run_name=name):
+            mlflow.log_param("candidate_model", name)
             search = build_search(name, config["estimator"], config["param_grid"], train_df)
             search.fit(X_train, y_train)
 
@@ -225,6 +221,12 @@ def main() -> None:
             mlflow.log_artifact(str(cm_path))
             mlflow.log_artifact(str(roc_path))
             mlflow.log_dict(search.best_params_, f"{name}_best_params.json")
+            mlflow.log_params(
+                {
+                    f"best_{param_name.replace('clf__', '')}": value
+                    for param_name, value in search.best_params_.items()
+                }
+            )
             input_example = X_train.head(5)
             signature = infer_signature(input_example, search.best_estimator_.predict(input_example))
             mlflow.sklearn.log_model(

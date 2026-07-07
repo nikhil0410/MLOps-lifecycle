@@ -66,7 +66,6 @@ def build_pipeline():
 
 
 def main():
-    mlflow.sklearn.autolog(log_models=False)
     df = load_data()
     X = df.drop(columns=["target"])
     y = df["target"]
@@ -78,6 +77,7 @@ def main():
     pipe = build_pipeline()
 
     with mlflow.start_run() as run:
+        mlflow.log_param("candidate_model", "random_forest")
         pipe.fit(X_train, y_train)
         preds = pipe.predict(X_val)
         probs = pipe.predict_proba(X_val)[:, 1]
