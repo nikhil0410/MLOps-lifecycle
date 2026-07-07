@@ -85,6 +85,7 @@ python3 scripts/run_reproducible_pipeline.py
 View MLflow UI:
 
 ```bash
+export MLFLOW_TRACKING_URI= sqlite:///mlflow.db
 mlflow ui
 # then open http://127.0.0.1:5000
 ```

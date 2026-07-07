@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
@@ -9,6 +10,10 @@ from sklearn.impute import SimpleImputer
 import mlflow
 import mlflow.sklearn
 from mlflow.models import infer_signature
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+DEFAULT_TRACKING_URI = f"sqlite:///{(ROOT_DIR / 'mlflow.db').as_posix()}"
+os.environ.setdefault("MLFLOW_TRACKING_URI", DEFAULT_TRACKING_URI)
 
 DATA_PATH = os.path.join("heart_disease", "processed.cleveland.data")
 

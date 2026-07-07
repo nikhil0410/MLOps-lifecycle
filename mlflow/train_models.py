@@ -8,7 +8,11 @@ import sys
 import tempfile
 from pathlib import Path
 
+ROOT_DIR = Path(__file__).resolve().parents[1]
+DEFAULT_TRACKING_URI = f"sqlite:///{(ROOT_DIR / 'mlflow.db').as_posix()}"
+
 os.environ.setdefault("MPLCONFIGDIR", tempfile.mkdtemp(prefix="matplotlib-"))
+os.environ.setdefault("MLFLOW_TRACKING_URI", DEFAULT_TRACKING_URI)
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -35,14 +39,13 @@ except ModuleNotFoundError as exc:
 from mlflow.models import infer_signature
 
 # ensure project root is on sys.path when running this script from the mlflow/ folder
-ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from src.modeling import RANDOM_STATE, TARGET_COLUMN, build_model_candidates  # noqa: E402
 from src.preprocessing import build_preprocessor  # noqa: E402
 
-ROOT = Path(ROOT_DIR)
+ROOT = ROOT_DIR
 CSV = ROOT / "data" / "processed_cleveland.csv"
 OUT = ROOT / "artifacts" / "models"
 SELECTION_JSON = OUT / "model_selection.json"
