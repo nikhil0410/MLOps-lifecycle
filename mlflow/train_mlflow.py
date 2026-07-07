@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
@@ -9,6 +10,10 @@ from sklearn.impute import SimpleImputer
 import mlflow
 import mlflow.sklearn
 from mlflow.models import infer_signature
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+DEFAULT_TRACKING_URI = f"sqlite:///{(ROOT_DIR / 'mlflow.db').as_posix()}"
+os.environ.setdefault("MLFLOW_TRACKING_URI", DEFAULT_TRACKING_URI)
 
 DATA_PATH = os.path.join("heart_disease", "processed.cleveland.data")
 
@@ -61,7 +66,6 @@ def build_pipeline():
 
 
 def main():
-    mlflow.sklearn.autolog(log_models=False)
     df = load_data()
     X = df.drop(columns=["target"])
     y = df["target"]
@@ -73,6 +77,7 @@ def main():
     pipe = build_pipeline()
 
     with mlflow.start_run() as run:
+        mlflow.log_param("candidate_model", "random_forest")
         pipe.fit(X_train, y_train)
         preds = pipe.predict(X_val)
         probs = pipe.predict_proba(X_val)[:, 1]
@@ -93,6 +98,7 @@ def main():
             name="random_forest_pipeline",
             input_example=input_example,
             signature=signature,
+            serialization_format="cloudpickle",
         )
 
         run_id = run.info.run_id

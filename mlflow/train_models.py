@@ -1,4 +1,5 @@
 """Train, tune, compare, and track candidate models with MLflow."""
+# ruff: noqa: E402
 
 from __future__ import annotations
 
@@ -8,7 +9,11 @@ import sys
 import tempfile
 from pathlib import Path
 
+ROOT_DIR = Path(__file__).resolve().parents[1]
+DEFAULT_TRACKING_URI = f"sqlite:///{(ROOT_DIR / 'mlflow.db').as_posix()}"
+
 os.environ.setdefault("MPLCONFIGDIR", tempfile.mkdtemp(prefix="matplotlib-"))
+os.environ.setdefault("MLFLOW_TRACKING_URI", DEFAULT_TRACKING_URI)
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -35,14 +40,13 @@ except ModuleNotFoundError as exc:
 from mlflow.models import infer_signature
 
 # ensure project root is on sys.path when running this script from the mlflow/ folder
-ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
-from src.modeling import RANDOM_STATE, TARGET_COLUMN, build_model_candidates
-from src.preprocessing import build_preprocessor
+from src.modeling import RANDOM_STATE, TARGET_COLUMN, build_model_candidates  # noqa: E402
+from src.preprocessing import build_preprocessor  # noqa: E402
 
-ROOT = Path(ROOT_DIR)
+ROOT = ROOT_DIR
 CSV = ROOT / "data" / "processed_cleveland.csv"
 OUT = ROOT / "artifacts" / "models"
 SELECTION_JSON = OUT / "model_selection.json"
@@ -183,7 +187,6 @@ def write_selection_artifacts(leaderboard: pd.DataFrame) -> None:
 
 def main() -> None:
     ensure()
-    mlflow.sklearn.autolog(log_datasets=False, log_models=False)
 
     df = load_data()
     X = df.drop(columns=[TARGET_COLUMN])
@@ -200,6 +203,7 @@ def main() -> None:
     leaderboard_rows = []
     for name, config in build_model_candidates().items():
         with mlflow.start_run(run_name=name):
+            mlflow.log_param("candidate_model", name)
             search = build_search(name, config["estimator"], config["param_grid"], train_df)
             search.fit(X_train, y_train)
 
@@ -217,6 +221,12 @@ def main() -> None:
             mlflow.log_artifact(str(cm_path))
             mlflow.log_artifact(str(roc_path))
             mlflow.log_dict(search.best_params_, f"{name}_best_params.json")
+            mlflow.log_params(
+                {
+                    f"best_{param_name.replace('clf__', '')}": value
+                    for param_name, value in search.best_params_.items()
+                }
+            )
             input_example = X_train.head(5)
             signature = infer_signature(input_example, search.best_estimator_.predict(input_example))
             mlflow.sklearn.log_model(
@@ -224,6 +234,7 @@ def main() -> None:
                 name=f"model_{name}",
                 input_example=input_example,
                 signature=signature,
+                serialization_format="cloudpickle",
             )
 
             leaderboard_rows.append(
