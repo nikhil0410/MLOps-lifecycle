@@ -91,3 +91,10 @@ export MLFLOW_TRACKING_URI=sqlite:///mlflow.db
 mlflow ui
 # then open http://127.0.0.1:5000
 ```
+
+## Report Assets
+
+- Step 7 deployment guide: `DEPLOYMENT_STEPS.MD`
+- Step 8 monitoring guide: `MONITORING_STEP.md`
+- Step 9 report template: `REPORT_STEP.md`
+- Suggested screenshot storage: `screenshots/`
