@@ -64,3 +64,47 @@ def test_predict_endpoint_rejects_empty_payload(monkeypatch):
 
     assert response.status_code == 400
     assert response.json()["detail"] == "No instances provided"
+
+
+def test_mlflow_summary_endpoint(monkeypatch):
+    class DummyExperiment:
+        experiment_id = "0"
+        name = "Default"
+        artifact_location = "/tmp/mlartifacts"
+        lifecycle_stage = "active"
+
+    class DummyRunInfo:
+        run_id = "run-123"
+        status = "FINISHED"
+        start_time = 1234567890
+
+    class DummyRunData:
+        metrics = {"test_roc_auc": 0.91}
+        params = {"candidate_model": "random_forest"}
+        tags = {"mlflow.runName": "random_forest"}
+
+    class DummyRun:
+        info = DummyRunInfo()
+        data = DummyRunData()
+
+    class DummyMlflowClient:
+        def search_experiments(self):
+            return [DummyExperiment()]
+
+        def search_runs(self, experiment_ids, order_by, max_results):
+            assert experiment_ids == ["0"]
+            assert max_results == 5
+            return [DummyRun()]
+
+    monkeypatch.setattr(app_main, "MlflowClient", lambda tracking_uri: DummyMlflowClient())
+    monkeypatch.setenv("MLFLOW_TRACKING_URI", "sqlite:///tmp/mlflow.db")
+
+    client = TestClient(app_main.app)
+    response = client.get("/mlflow")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["tracking_uri"] == "sqlite:///tmp/mlflow.db"
+    assert payload["experiment_count"] == 1
+    assert payload["experiments"][0]["name"] == "Default"
+    assert payload["experiments"][0]["latest_runs"][0]["metrics"]["test_roc_auc"] == 0.91
