@@ -424,12 +424,17 @@ Add a simple architecture diagram showing:
 7. Kubernetes deployment
 8. monitoring via `/metrics`
 
-You can create this diagram in:
+A Mermaid version of the architecture is available in:
+
+- `ARCHITECTURE_DIAGRAM.md`
+
+You can create a rendered image from that Mermaid diagram using:
 
 - draw.io
 - PowerPoint
 - Excalidraw
 - Lucidchart
+- mermaid.live
 
 Insert the final image in the report here.
 
@@ -474,4 +479,3 @@ Before final submission, confirm the following:
 - [ ] local access instructions included
 - [ ] final report exported as PDF/doc/docx
 - [ ] short demo video recorded
-

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: heart-disease-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    autoDeploy: true
+
+  - type: web
+    name: heart-disease-streamlit
+    runtime: docker
+    dockerfilePath: ./Dockerfile.streamlit
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: HEART_DISEASE_API_URL
+        sync: false

@@ -92,9 +92,41 @@ mlflow ui
 # then open http://127.0.0.1:5000
 ```
 
+## Streamlit frontend
+
+Run the optional Streamlit UI locally:
+
+```bash
+python3 -m pip install -r requirements-streamlit.txt
+streamlit run streamlit_app.py
+```
+
+- Set `HEART_DISEASE_API_URL` if your FastAPI API is running on Render or another host.
+- For Render deployment, use a start command like:
+
+```bash
+streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+```
+
+## Render deployment
+
+This repository now supports a two-service Render setup:
+
+- `heart-disease-api` uses [Dockerfile](/Users/nikhil.gupta579@optum.com/Documents/BITS/Assignment/MLOps/MLOps-lifecycle/Dockerfile)
+- `heart-disease-streamlit` uses [Dockerfile.streamlit](/Users/nikhil.gupta579@optum.com/Documents/BITS/Assignment/MLOps/MLOps-lifecycle/Dockerfile.streamlit)
+- [render.yaml](/Users/nikhil.gupta579@optum.com/Documents/BITS/Assignment/MLOps/MLOps-lifecycle/render.yaml) declares both services
+
+Typical flow on Render:
+
+```bash
+git push origin main
+```
+
+Then create a new Blueprint deployment in Render and point it at this repository. Render will read `render.yaml` and provision both services. After the API service is created, set `HEART_DISEASE_API_URL` on the Streamlit service to the public API URL if Render does not fill it automatically.
+
 ## Report Assets
 
 - Step 7 deployment guide: `DEPLOYMENT_STEPS.MD`
-- Step 8 monitoring guide: `MONITORING_STEP.md`
-- Step 9 report template: `REPORT_STEP.md`
+- Step 8 monitoring guide: `MONITORING_STEP8.md`
+- Step 9 report template: `REPORT_STEP9.md`
 - Suggested screenshot storage: `screenshots/`
